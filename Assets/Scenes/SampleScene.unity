@@ -468,9 +468,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70daca7c717027441b3f479fa59a244f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelerationRight: 1
-  VelocityRight: 10
-  MaxVelocity: 1000
+  AccelerationRight: 0.01
+  InitialVelocity: 10
+  VelocityRight: 0
+  MaxVelocity: 50
+  RD: {fileID: 0}
 --- !u!61 &1952540126
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -602,7 +604,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1001 &4446525048740841936
 PrefabInstance:
   m_ObjectHideFlags: 0
