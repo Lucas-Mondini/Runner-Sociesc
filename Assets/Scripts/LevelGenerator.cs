@@ -33,8 +33,6 @@ public class LevelGenerator : MonoBehaviour
     {
         SpawnFloor(FloorList.Last().transform.Find("NextSpawnPoint").position);
         
-        Debug.Log("before destroy " + c);
         Destroy(c.gameObject.gameObject.transform.parent.gameObject, 2f);
-        Debug.Log("after destroy " + c);
     }
 }

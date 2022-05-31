@@ -9,11 +9,15 @@ public class FloorCollider : MonoBehaviour
     public SpawnFloor spawnFloor;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        try
+        if (other.name == "MainCharacter")
         {
-            spawnFloor(this);
+            try
+            {
+                spawnFloor(this);
+            }
+            catch (Exception e)
+            {
+            }
         }
-        catch (Exception e)
-        { }
     }
 }
