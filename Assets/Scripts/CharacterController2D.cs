@@ -18,11 +18,15 @@ public class CharacterController2D : MonoBehaviour
     
     void Update()
     {
+        /**
         VelocityRight = RD.velocity.x + AccelerationRight;
         if (VelocityRight <= MaxVelocity)
         {
             RD.velocity = new Vector2(VelocityRight, 0);
         }
+        */
+        
+        transform.Translate(5f * Time.deltaTime, 0f, 0f);
         //var onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
