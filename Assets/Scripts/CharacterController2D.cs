@@ -10,16 +10,23 @@ public class CharacterController2D : MonoBehaviour
     public float jumpHeigt = 5;
     public Rigidbody2D RD;
     public bool isGrounded = true;
+    private float timeAccumulator = 0;
 
     void Start()
     {
         RD = GetComponent<Rigidbody2D>();
-        RD.velocity = new Vector2(InitialVelocity, 0);
+        //RD.velocity = new Vector2(InitialVelocity, 0);
         transform.Find("FloorTrigger").GetComponent<CharacterFloorTrigger>().characterScriptRef = this;
     }
     
     void Update()
     {
+        timeAccumulator += Time.deltaTime;
+        if (timeAccumulator >= 1)
+        {
+            ScoreManager.instance.addPoint();
+            timeAccumulator = 0;
+        }
 
         transform.Translate(5f * Time.deltaTime, 0f, 0f);
         //var onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);

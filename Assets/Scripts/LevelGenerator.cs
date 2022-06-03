@@ -15,24 +15,35 @@ public class LevelGenerator : MonoBehaviour
     private void Awake()
     {
         FloorList.Add(FloorRef);
-        for(int i = 0; i < 5; i++)
-            SpawnFloor(FloorList.Last().transform.Find("NextSpawnPoint").position);
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 pos = FloorList.Last().transform.Find("FloorSample").transform.Find("FloorSample").transform.Find("NextSpawnPoint").position;
+            SpawnFloor(pos);
+        }
     }
 
     private void SpawnFloor(Vector3 Position)
     {
-        int index = new Random().Next(FloorTilesPrefab.Count);
+        int total = FloorTilesPrefab.Count;
+        int index = new Random().Next(total);
+        Position.z = 0;
+
+        Debug.Log("total = " + total + "\tindex = " + index);
         GameObject objectSpawned = Instantiate(FloorTilesPrefab[index], Position, Quaternion.identity); 
         FloorList.Add(objectSpawned);
-        FloorCollider c = objectSpawned.transform.Find("DestroyObjectTrigger").GetComponent<FloorCollider>();
+        FloorCollider c;
+        c = objectSpawned.transform.Find("FloorSample").transform.Find("FloorSample").transform.Find("DestroyObjectTrigger")
+                .GetComponent<FloorCollider>();
+        
+
         c.spawnFloor = SpawnFloor;
 
     }
     
     private void SpawnFloor(FloorCollider c)
     {
-        SpawnFloor(FloorList.Last().transform.Find("NextSpawnPoint").position);
+        SpawnFloor(FloorList.Last().transform.Find("FloorSample").transform.Find("FloorSample").transform.Find("NextSpawnPoint").position);
         
-        Destroy(c.gameObject.gameObject.transform.parent.gameObject, 2f);
+        Destroy(c.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject, 5f);
     }
 }
